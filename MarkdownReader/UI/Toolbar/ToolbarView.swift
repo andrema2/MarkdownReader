@@ -7,63 +7,180 @@ struct ToolbarView: View {
     @Binding var showPreview: Bool
 
     var body: some View {
-        HStack(spacing: 12) {
-            // File info
-            HStack(spacing: 6) {
-                Image(systemName: iconForFileType)
-                    .foregroundColor(.secondary)
-                Text(document.fileName)
-                    .font(.headline)
-                    .lineLimit(1)
-                if document.isDirty {
-                    Circle()
-                        .fill(Color.orange)
-                        .frame(width: 8, height: 8)
-                }
+        VStack(spacing: 0) {
+            // Primary bar — file info + global actions
+            HStack(spacing: 0) {
+                fileInfoSection
+                Spacer()
+                globalActionsSection
             }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 8)
 
             Divider()
-                .frame(height: 20)
 
-            // Format controls (only for Markdown)
-            if document.fileType == .markdown {
-                FormatControls(document: document)
+            // Contextual bar — format-specific controls
+            HStack(spacing: 0) {
+                contextualControls
+                Spacer()
+                convertSection
             }
-
-            Spacer()
-
-            // Preview toggle
-            Button(action: { showPreview.toggle() }) {
-                Image(systemName: showPreview ? "eye.fill" : "eye.slash")
-            }
-            .buttonStyle(.borderless)
-            .help("Toggle syntax highlight preview")
-
-            // Lint toggle
-            Button(action: { showLintPanel.toggle() }) {
-                HStack(spacing: 4) {
-                    Image(systemName: lintEngine.issues.isEmpty ? "checkmark.circle" : "exclamationmark.triangle")
-                        .foregroundColor(lintEngine.issues.isEmpty ? .green : .orange)
-                    Text("\(lintEngine.issues.count)")
-                        .font(.caption)
-                        .monospacedDigit()
-                }
-            }
-            .buttonStyle(.borderless)
-            .help("Toggle lint panel")
+            .padding(.horizontal, 16)
+            .padding(.vertical, 6)
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 6)
         .background(.bar)
     }
 
-    private var iconForFileType: String {
-        switch document.fileType {
-        case .markdown: return "doc.richtext"
-        case .json: return "curlybraces"
-        case .yaml: return "doc.text"
-        case .javascript: return "chevron.left.forwardslash.chevron.right"
-        case .plain: return "doc"
+    // MARK: - File Info (left side, primary bar)
+
+    private var fileInfoSection: some View {
+        HStack(spacing: 8) {
+            // File type badge
+            HStack(spacing: 5) {
+                Image(systemName: document.fileType.icon)
+                    .font(.system(size: 12, weight: .medium))
+                Text(document.fileType.displayName)
+                    .font(.system(size: 11, weight: .semibold))
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(Color.accentColor.opacity(0.12))
+            )
+            .foregroundColor(.accentColor)
+
+            // File name
+            Text(document.fileName)
+                .font(.system(size: 13, weight: .medium))
+                .lineLimit(1)
+
+            if document.isDirty {
+                Circle()
+                    .fill(Color.orange)
+                    .frame(width: 7, height: 7)
+                    .help("Unsaved changes")
+            }
         }
+    }
+
+    // MARK: - Global Actions (right side, primary bar)
+
+    private var globalActionsSection: some View {
+        HStack(spacing: 2) {
+            toolbarButton("Preview", icon: showPreview ? "eye.fill" : "eye.slash", active: showPreview) {
+                showPreview.toggle()
+            }
+
+            toolbarButton("Issues", icon: lintIcon, active: showLintPanel, badge: lintEngine.issues.count) {
+                showLintPanel.toggle()
+            }
+        }
+    }
+
+    private var lintIcon: String {
+        if lintEngine.isRunning { return "arrow.triangle.2.circlepath" }
+        if lintEngine.issues.isEmpty { return "checkmark.circle" }
+        let hasErrors = lintEngine.issues.contains { $0.severity == .error }
+        return hasErrors ? "xmark.circle" : "exclamationmark.triangle"
+    }
+
+    // MARK: - Contextual Controls (left side, secondary bar)
+
+    @ViewBuilder
+    private var contextualControls: some View {
+        switch document.fileType {
+        case .markdown:
+            MarkdownControls(document: document)
+        case .json:
+            JSONControls(document: document)
+        case .yaml:
+            YAMLControls(document: document)
+        case .javascript:
+            JSControls(document: document)
+        case .plain:
+            PlainTextControls(document: document)
+        }
+    }
+
+    // MARK: - Convert Section (right side, secondary bar)
+
+    @ViewBuilder
+    private var convertSection: some View {
+        let targets = document.fileType.convertibleTargets
+        if !targets.isEmpty {
+            Menu {
+                ForEach(targets) { target in
+                    Button {
+                        convertDocument(to: target)
+                    } label: {
+                        Label(target.displayName, systemImage: target.icon)
+                    }
+                }
+            } label: {
+                HStack(spacing: 4) {
+                    Image(systemName: "arrow.triangle.swap")
+                        .font(.system(size: 11))
+                    Text("Convert")
+                        .font(.system(size: 11, weight: .medium))
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(
+                    RoundedRectangle(cornerRadius: 5)
+                        .fill(Color.secondary.opacity(0.1))
+                )
+            }
+            .menuStyle(.borderlessButton)
+            .fixedSize()
+            .help("Convert to another format")
+        }
+    }
+
+    private func convertDocument(to target: DocumentModel.FileType) {
+        let source = document.fileType
+        if let converted = FormatConverter.convert(document.content, from: source, to: target) {
+            document.updateContent(converted)
+        }
+        document.fileType = target
+
+        // Update file URL extension if we have one
+        if let url = document.fileURL {
+            let newURL = url.deletingPathExtension().appendingPathExtension(target.primaryExtension)
+            document.fileURL = newURL
+        }
+    }
+
+    // MARK: - Toolbar Button
+
+    private func toolbarButton(_ label: String, icon: String, active: Bool, badge: Int = 0, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 12))
+                    .foregroundColor(active ? .accentColor : .secondary)
+
+                if badge > 0 {
+                    Text("\(badge)")
+                        .font(.system(size: 10, weight: .bold))
+                        .monospacedDigit()
+                        .padding(.horizontal, 5)
+                        .padding(.vertical, 1)
+                        .background(
+                            Capsule()
+                                .fill(Color.orange.opacity(0.2))
+                        )
+                        .foregroundColor(.orange)
+                }
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .fill(active ? Color.accentColor.opacity(0.1) : Color.clear)
+            )
+        }
+        .buttonStyle(.borderless)
+        .help(label)
     }
 }

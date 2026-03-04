@@ -15,12 +15,14 @@ class DocumentModel: ObservableObject {
         fileURL?.pathExtension.lowercased() ?? "md"
     }
 
-    enum FileType: String, CaseIterable {
+    enum FileType: String, CaseIterable, Identifiable {
         case markdown = "md"
         case json = "json"
         case yaml = "yaml"
         case javascript = "js"
         case plain = "txt"
+
+        var id: String { rawValue }
 
         var displayName: String {
             switch self {
@@ -29,6 +31,29 @@ class DocumentModel: ObservableObject {
             case .yaml: return "YAML"
             case .javascript: return "JavaScript"
             case .plain: return "Plain Text"
+            }
+        }
+
+        var icon: String {
+            switch self {
+            case .markdown: return "doc.richtext"
+            case .json: return "curlybraces"
+            case .yaml: return "doc.text"
+            case .javascript: return "chevron.left.forwardslash.chevron.right"
+            case .plain: return "doc"
+            }
+        }
+
+        var primaryExtension: String { rawValue }
+
+        /// Formats this type can be converted to.
+        var convertibleTargets: [FileType] {
+            switch self {
+            case .markdown: return [.plain]
+            case .json: return [.yaml]
+            case .yaml: return [.json]
+            case .plain: return [.markdown]
+            case .javascript: return []
             }
         }
 

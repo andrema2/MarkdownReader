@@ -13,6 +13,7 @@
 		28A038B30EAAFE29C4E83041 /* LintEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B5376E9D312672CB1D9AF /* LintEngine.swift */; };
 		2AAC8359EC11D814F3B6277B /* YAMLLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA738D17F6E4DD53CF45FD58 /* YAMLLinter.swift */; };
 		3F597A7BF0C4B7C25BA2FDA8 /* highlight in Resources */ = {isa = PBXBuildFile; fileRef = DD39B990C189353E1832698C /* highlight */; };
+		531DED1C6BDCDD35E5AB6E9E /* FormatConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084F2544A1AABA340D43DEE9 /* FormatConverter.swift */; };
 		54DDF274D31B868655ABDF3B /* LanguageMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6230A769825B9AEB98FC26 /* LanguageMap.swift */; };
 		6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FA5647B08CDEB2636AF687 /* FileIO.swift */; };
 		73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		041FA90049061E6E0EE051A3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		084F2544A1AABA340D43DEE9 /* FormatConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatConverter.swift; sourceTree = "<group>"; };
 		1768ADCDA5264BB8F1A4CE79 /* MarkdownReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownReader.entitlements; sourceTree = "<group>"; };
 		4A8FE7E6D7F55F49E36C2AF5 /* JSONLinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLinter.swift; sourceTree = "<group>"; };
 		5F56EF692F0497D05158F548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			children = (
 				A4622ABFC460ED188CBB5645 /* DocumentModel.swift */,
 				72FA5647B08CDEB2636AF687 /* FileIO.swift */,
+				084F2544A1AABA340D43DEE9 /* FormatConverter.swift */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				FFAE24B57892805F3ED1BC40 /* EditorView.swift in Sources */,
 				6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */,
 				03C1E74DE091B3F9947401D5 /* FormatControls.swift in Sources */,
+				531DED1C6BDCDD35E5AB6E9E /* FormatConverter.swift in Sources */,
 				EA7362E24ED586589DFC6612 /* HighlightEngine.swift in Sources */,
 				B6350D4313C4A7FCB6E30FC8 /* JSLinter.swift in Sources */,
 				7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */,
