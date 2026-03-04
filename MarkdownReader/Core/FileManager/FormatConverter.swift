@@ -26,7 +26,7 @@ enum FormatConverter {
     static func canTransform(from source: DocumentModel.FileType, to target: DocumentModel.FileType) -> Bool {
         let transformable: Set<String> = [
             "json→yaml", "yaml→json",
-            "markdown→plain", "plain→markdown",
+            "md→txt", "txt→md",
         ]
         return transformable.contains("\(source.rawValue)→\(target.rawValue)")
     }

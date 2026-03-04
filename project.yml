@@ -35,3 +35,16 @@ targets:
         COMBINE_HIDPI_IMAGES: YES
         ENABLE_HARDENED_RUNTIME: YES
         GENERATE_INFOPLIST_FILE: NO
+  MarkEditTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: MarkEditTests
+    dependencies:
+      - target: MarkEdit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.andrema2.MarkEditTests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/MarkEdit.app/Contents/MacOS/MarkEdit"
+        BUNDLE_LOADER: "$(TEST_HOST)"

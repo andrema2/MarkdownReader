@@ -17,5 +17,10 @@ let package = Package(
                 .copy("Resources/highlight"),
             ]
         ),
+        .testTarget(
+            name: "MarkEditTests",
+            dependencies: ["MarkEdit"],
+            path: "MarkEditTests"
+        ),
     ]
 )
