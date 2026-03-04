@@ -19,7 +19,7 @@ struct EditorView: View {
                 Divider()
 
                 HSplitView {
-                    CodeTextView(document: document, goToLine: goToLine)
+                    CodeTextView(document: document, lintEngine: lintEngine, goToLine: goToLine)
                         .frame(minWidth: 300)
 
                     if showPreview {

@@ -5,65 +5,151 @@ struct StatusBarView: View {
     @ObservedObject var lintEngine: LintEngine
 
     var body: some View {
-        HStack(spacing: 16) {
-            // Line/character count
-            HStack(spacing: 4) {
-                Image(systemName: "text.alignleft")
-                    .font(.caption2)
-                    .foregroundColor(.secondary)
-                Text("\(lineCount) lines, \(document.content.count) chars")
-                    .font(.caption)
-                    .monospacedDigit()
+        VStack(spacing: 0) {
+            // Error message bar (shown when cursor is on a line with an issue)
+            if let issue = document.currentLineIssue {
+                issueBar(issue)
             }
 
             Divider()
-                .frame(height: 12)
 
-            // File type
-            Text(document.fileType.displayName)
-                .font(.caption)
-                .foregroundColor(.secondary)
+            // Main status bar
+            HStack(spacing: 12) {
+                // Cursor position
+                HStack(spacing: 4) {
+                    Image(systemName: "cursorarrow.and.square.on.square.dashed")
+                        .font(.system(size: 10))
+                        .foregroundColor(.secondary)
+                    Text("Ln \(document.cursorLine), Col \(document.cursorColumn)")
+                        .font(.system(size: 11, design: .monospaced))
+                        .monospacedDigit()
+                }
 
-            Divider()
-                .frame(height: 12)
+                ToolbarSeparator()
 
-            // Encoding
-            Text(encodingName)
-                .font(.caption)
-                .foregroundColor(.secondary)
+                // Line/character count
+                HStack(spacing: 4) {
+                    Image(systemName: "text.alignleft")
+                        .font(.system(size: 10))
+                        .foregroundColor(.secondary)
+                    Text("\(lineCount) lines, \(document.content.count) chars")
+                        .font(.system(size: 11))
+                        .monospacedDigit()
+                }
+
+                ToolbarSeparator()
+
+                // File type
+                Text(document.fileType.displayName)
+                    .font(.system(size: 11))
+                    .foregroundColor(.secondary)
+
+                ToolbarSeparator()
+
+                // Encoding
+                Text(encodingName)
+                    .font(.system(size: 11))
+                    .foregroundColor(.secondary)
+
+                Spacer()
+
+                // Lint summary
+                lintSummary
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 4)
+            .background(.bar)
+        }
+    }
+
+    // MARK: - Issue Bar
+
+    private func issueBar(_ issue: LintIssue) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: issueIcon(issue.severity))
+                .font(.system(size: 11))
+                .foregroundColor(issueColor(issue.severity))
+
+            Text(issue.message)
+                .font(.system(size: 11))
+                .lineLimit(1)
+                .foregroundColor(issueColor(issue.severity))
+
+            if let rule = issue.rule {
+                Text("(\(rule))")
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundColor(issueColor(issue.severity).opacity(0.7))
+            }
 
             Spacer()
 
-            // Lint summary
-            if !lintEngine.issues.isEmpty {
-                HStack(spacing: 8) {
-                    let errors = lintEngine.issues.filter { $0.severity == .error }.count
-                    let warnings = lintEngine.issues.filter { $0.severity == .warning }.count
-
-                    if errors > 0 {
-                        HStack(spacing: 2) {
-                            Image(systemName: "xmark.circle.fill")
-                                .foregroundColor(.red)
-                            Text("\(errors)")
-                        }
-                        .font(.caption)
-                    }
-
-                    if warnings > 0 {
-                        HStack(spacing: 2) {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                                .foregroundColor(.orange)
-                            Text("\(warnings)")
-                        }
-                        .font(.caption)
-                    }
-                }
-            }
+            Text(issue.source)
+                .font(.system(size: 10, weight: .medium))
+                .padding(.horizontal, 6)
+                .padding(.vertical, 1)
+                .background(
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(issueColor(issue.severity).opacity(0.12))
+                )
+                .foregroundColor(issueColor(issue.severity))
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 4)
-        .background(.bar)
+        .background(issueColor(issue.severity).opacity(0.06))
     }
+
+    private func issueIcon(_ severity: LintIssue.Severity) -> String {
+        switch severity {
+        case .error: return "xmark.circle.fill"
+        case .warning: return "exclamationmark.triangle.fill"
+        case .info: return "info.circle.fill"
+        }
+    }
+
+    private func issueColor(_ severity: LintIssue.Severity) -> Color {
+        switch severity {
+        case .error: return .red
+        case .warning: return .orange
+        case .info: return .blue
+        }
+    }
+
+    // MARK: - Lint Summary
+
+    @ViewBuilder
+    private var lintSummary: some View {
+        if !lintEngine.issues.isEmpty {
+            HStack(spacing: 6) {
+                if lintEngine.errorCount > 0 {
+                    HStack(spacing: 2) {
+                        Image(systemName: "xmark.circle.fill")
+                            .foregroundColor(.red)
+                        Text("\(lintEngine.errorCount)")
+                    }
+                    .font(.system(size: 11))
+                }
+
+                if lintEngine.warningCount > 0 {
+                    HStack(spacing: 2) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .foregroundColor(.orange)
+                        Text("\(lintEngine.warningCount)")
+                    }
+                    .font(.system(size: 11))
+                }
+            }
+        } else {
+            HStack(spacing: 3) {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+                Text("No issues")
+            }
+            .font(.system(size: 11))
+            .foregroundColor(.secondary)
+        }
+    }
+
+    // MARK: - Helpers
 
     private var lineCount: Int {
         document.content.isEmpty ? 0 : document.content.components(separatedBy: .newlines).count
@@ -77,5 +163,12 @@ struct StatusBarView: View {
         case .isoLatin1: return "ISO-8859-1"
         default: return "UTF-8"
         }
+    }
+}
+
+private struct ToolbarSeparator: View {
+    var body: some View {
+        Divider()
+            .frame(height: 12)
     }
 }

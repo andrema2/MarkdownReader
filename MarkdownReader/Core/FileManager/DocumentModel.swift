@@ -6,6 +6,9 @@ class DocumentModel: ObservableObject {
     @Published var isDirty: Bool = false
     @Published var encoding: String.Encoding = .utf8
     @Published var fileType: FileType = .markdown
+    @Published var cursorLine: Int = 1
+    @Published var cursorColumn: Int = 1
+    @Published var currentLineIssue: LintIssue?
 
     var fileName: String {
         fileURL?.lastPathComponent ?? "Untitled"
