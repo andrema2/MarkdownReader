@@ -7,6 +7,7 @@ struct EditorView: View {
     @State private var showLintPanel = true
     @State private var showPreview = true
     @State private var isDragTargeted = false
+    @State private var goToLine: Int?
 
     var body: some View {
         HSplitView {
@@ -17,7 +18,7 @@ struct EditorView: View {
                 Divider()
 
                 HSplitView {
-                    CodeTextView(document: document)
+                    CodeTextView(document: document, goToLine: goToLine)
                         .frame(minWidth: 300)
 
                     if showPreview {
@@ -36,8 +37,14 @@ struct EditorView: View {
 
             // Lint sidebar
             if showLintPanel {
-                LintPanel(lintEngine: lintEngine)
-                    .frame(minWidth: 220, maxWidth: 320)
+                LintPanel(lintEngine: lintEngine) { issue in
+                    goToLine = nil
+                    // Small delay to ensure the state resets before setting new value
+                    DispatchQueue.main.async {
+                        goToLine = issue.line
+                    }
+                }
+                .frame(minWidth: 240, maxWidth: 350)
             }
         }
         .frame(minWidth: 700, minHeight: 500)
@@ -84,6 +91,7 @@ struct EditorView: View {
         document.isDirty = false
         document.fileType = .markdown
         lintEngine.clear()
+        goToLine = nil
         updateWindowState()
     }
 
@@ -131,6 +139,7 @@ struct EditorView: View {
             document.encoding = encoding
             document.fileType = .from(extension: url.pathExtension)
             document.isDirty = false
+            goToLine = nil
             updateWindowState()
             runLint()
         } catch {
@@ -139,9 +148,7 @@ struct EditorView: View {
     }
 
     private func runLint() {
-        Task {
-            await lintEngine.run(content: document.content, fileExtension: document.fileExtension)
-        }
+        lintEngine.run(content: document.content, fileExtension: document.fileExtension)
     }
 
     private func updateWindowState() {

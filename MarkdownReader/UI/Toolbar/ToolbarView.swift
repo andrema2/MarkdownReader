@@ -96,8 +96,10 @@ struct ToolbarView: View {
             JSONControls(document: document)
         case .yaml:
             YAMLControls(document: document)
-        case .javascript:
+        case .javascript, .typescript:
             JSControls(document: document)
+        case .css:
+            CSSControls(document: document)
         case .plain:
             PlainTextControls(document: document)
         }

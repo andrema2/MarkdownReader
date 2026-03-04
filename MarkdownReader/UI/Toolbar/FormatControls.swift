@@ -311,6 +311,43 @@ struct JSControls: View {
     }
 }
 
+// MARK: - CSS Controls
+
+struct CSSControls: View {
+    @ObservedObject var document: DocumentModel
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ToolbarGroup("Insert") {
+                ToolbarIconButton(label: "Rule", icon: "paintbrush") {
+                    append("\n.class-name {\n  \n}\n")
+                }
+                ToolbarIconButton(label: "Media Query", icon: "display") {
+                    append("\n@media (max-width: 768px) {\n  \n}\n")
+                }
+                ToolbarIconButton(label: "Variable", icon: "textformat") {
+                    append("\n  --var-name: value;")
+                }
+                ToolbarIconButton(label: "Keyframes", icon: "play") {
+                    append("\n@keyframes name {\n  from { }\n  to { }\n}\n")
+                }
+            }
+
+            ToolbarSep()
+
+            ToolbarGroup("Comment") {
+                ToolbarIconButton(label: "Comment", icon: "text.justify.left") {
+                    append("\n/* */")
+                }
+            }
+        }
+    }
+
+    private func append(_ text: String) {
+        document.updateContent(document.content + text)
+    }
+}
+
 // MARK: - Plain Text Controls
 
 struct PlainTextControls: View {

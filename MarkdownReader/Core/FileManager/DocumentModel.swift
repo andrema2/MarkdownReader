@@ -20,6 +20,8 @@ class DocumentModel: ObservableObject {
         case json = "json"
         case yaml = "yaml"
         case javascript = "js"
+        case typescript = "ts"
+        case css = "css"
         case plain = "txt"
 
         var id: String { rawValue }
@@ -30,6 +32,8 @@ class DocumentModel: ObservableObject {
             case .json: return "JSON"
             case .yaml: return "YAML"
             case .javascript: return "JavaScript"
+            case .typescript: return "TypeScript"
+            case .css: return "CSS"
             case .plain: return "Plain Text"
             }
         }
@@ -40,6 +44,8 @@ class DocumentModel: ObservableObject {
             case .json: return "curlybraces"
             case .yaml: return "doc.text"
             case .javascript: return "chevron.left.forwardslash.chevron.right"
+            case .typescript: return "chevron.left.forwardslash.chevron.right"
+            case .css: return "paintbrush"
             case .plain: return "doc"
             }
         }
@@ -53,16 +59,18 @@ class DocumentModel: ObservableObject {
             case .json: return [.yaml]
             case .yaml: return [.json]
             case .plain: return [.markdown]
-            case .javascript: return []
+            case .javascript, .typescript, .css: return []
             }
         }
 
         static func from(extension ext: String) -> FileType {
             switch ext.lowercased() {
             case "md", "markdown": return .markdown
-            case "json": return .json
+            case "json", "jsonl": return .json
             case "yaml", "yml": return .yaml
-            case "js": return .javascript
+            case "js", "jsx", "mjs", "cjs": return .javascript
+            case "ts", "tsx", "mts", "cts": return .typescript
+            case "css", "scss", "less": return .css
             default: return .plain
             }
         }
