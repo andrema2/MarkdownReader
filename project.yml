@@ -33,5 +33,3 @@ targets:
         COMBINE_HIDPI_IMAGES: YES
         ENABLE_HARDENED_RUNTIME: YES
         GENERATE_INFOPLIST_FILE: NO
-    entitlements:
-      path: MarkdownReader/MarkdownReader.entitlements

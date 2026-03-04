@@ -15,13 +15,7 @@ struct EditorView: View {
 
                 Divider()
 
-                TextEditor(text: Binding(
-                    get: { document.content },
-                    set: { document.updateContent($0) }
-                ))
-                .font(.system(.body, design: .monospaced))
-                .scrollContentBackground(.hidden)
-                .padding(4)
+                CodeTextView(document: document)
 
                 Divider()
 
@@ -55,9 +49,18 @@ struct EditorView: View {
         .onReceive(NotificationCenter.default.publisher(for: .saveDocumentAs)) { _ in
             saveDocumentAs()
         }
-        .navigationTitle(document.fileName + (document.isDirty ? " — Edited" : ""))
-        .onChange(of: document.content) { _ in
+        .navigationTitle(document.fileName)
+        .onChange(of: document.content) {
             runLint()
+        }
+        .onChange(of: document.fileURL) {
+            if let url = document.fileURL {
+                NSApp.mainWindow?.representedURL = url
+                NSApp.mainWindow?.title = url.lastPathComponent
+            } else {
+                NSApp.mainWindow?.representedURL = nil
+                NSApp.mainWindow?.title = "Untitled"
+            }
         }
     }
 
@@ -69,6 +72,7 @@ struct EditorView: View {
         document.isDirty = false
         document.fileType = .markdown
         lintEngine.clear()
+        updateWindowState()
     }
 
     private func openDocument() {
@@ -83,6 +87,7 @@ struct EditorView: View {
             do {
                 try FileIO.write(document.content, to: url, encoding: document.encoding)
                 document.markClean()
+                updateWindowState()
             } catch {
                 // TODO: show alert
             }
@@ -99,6 +104,7 @@ struct EditorView: View {
                 document.fileURL = url
                 document.fileType = .from(extension: url.pathExtension)
                 document.markClean()
+                updateWindowState()
             } catch {
                 // TODO: show alert
             }
@@ -113,6 +119,7 @@ struct EditorView: View {
             document.encoding = encoding
             document.fileType = .from(extension: url.pathExtension)
             document.isDirty = false
+            updateWindowState()
             runLint()
         } catch {
             document.content = "Error loading file: \(error.localizedDescription)"
@@ -123,6 +130,10 @@ struct EditorView: View {
         Task {
             await lintEngine.run(content: document.content, fileExtension: document.fileExtension)
         }
+    }
+
+    private func updateWindowState() {
+        NSApp.mainWindow?.isDocumentEdited = document.isDirty
     }
 
     private func handleDrop(providers: [NSItemProvider]) -> Bool {

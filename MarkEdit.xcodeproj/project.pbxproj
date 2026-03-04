@@ -16,6 +16,7 @@
 		73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */; };
 		76CD46988AD02F8B144EC66A /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29BC36839415782416C4F52 /* StatusBarView.swift */; };
 		7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8FE7E6D7F55F49E36C2AF5 /* JSONLinter.swift */; };
+		A0E8B59AF1BFD86E3AA7D839 /* CodeTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB1F58C265ADACD87A9A44C /* CodeTextView.swift */; };
 		B6350D4313C4A7FCB6E30FC8 /* JSLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CFF3DA6BE737D6456C1C05 /* JSLinter.swift */; };
 		DBA64F65F680DED05011E596 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B031D2DC3103EF95EB92C209 /* ToolbarView.swift */; };
 		E61A3D5DB4C079E39067E3B3 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4622ABFC460ED188CBB5645 /* DocumentModel.swift */; };
@@ -38,6 +39,7 @@
 		BA738D17F6E4DD53CF45FD58 /* YAMLLinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLLinter.swift; sourceTree = "<group>"; };
 		C69899E780118AC468B10427 /* LintPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LintPanel.swift; sourceTree = "<group>"; };
 		C93B5376E9D312672CB1D9AF /* LintEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LintEngine.swift; sourceTree = "<group>"; };
+		DAB1F58C265ADACD87A9A44C /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F18899E99D0BCFE44A6AC84E /* MarkEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B64973AFFD2412DECE4F2B /* FormatControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatControls.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				402CA019F994B52D61ED8319 /* Sidebar */,
 				07D7E5F46175307996F99D2C /* StatusBar */,
 				5A24A9808654EF733FC81621 /* Toolbar */,
+				DAB1F58C265ADACD87A9A44C /* CodeTextView.swift */,
 				041FA90049061E6E0EE051A3 /* EditorView.swift */,
 			);
 			path = UI;
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20ADD048EE0B9D4EFDE7713B /* AppDelegate.swift in Sources */,
+				A0E8B59AF1BFD86E3AA7D839 /* CodeTextView.swift in Sources */,
 				E61A3D5DB4C079E39067E3B3 /* DocumentModel.swift in Sources */,
 				FFAE24B57892805F3ED1BC40 /* EditorView.swift in Sources */,
 				6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */,
