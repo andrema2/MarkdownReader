@@ -20,6 +20,7 @@ class DocumentModel: ObservableObject {
 
     enum FileType: String, CaseIterable, Identifiable {
         case markdown = "md"
+        case html = "html"
         case json = "json"
         case yaml = "yaml"
         case javascript = "js"
@@ -32,6 +33,7 @@ class DocumentModel: ObservableObject {
         var displayName: String {
             switch self {
             case .markdown: return "Markdown"
+            case .html: return "HTML"
             case .json: return "JSON"
             case .yaml: return "YAML"
             case .javascript: return "JavaScript"
@@ -44,6 +46,7 @@ class DocumentModel: ObservableObject {
         var icon: String {
             switch self {
             case .markdown: return "doc.richtext"
+            case .html: return "globe"
             case .json: return "curlybraces"
             case .yaml: return "doc.text"
             case .javascript: return "chevron.left.forwardslash.chevron.right"
@@ -58,7 +61,8 @@ class DocumentModel: ObservableObject {
         /// Formats this type can be converted to.
         var convertibleTargets: [FileType] {
             switch self {
-            case .markdown: return [.plain]
+            case .markdown: return [.html, .plain]
+            case .html: return [.markdown]
             case .json: return [.yaml]
             case .yaml: return [.json]
             case .plain: return [.markdown]
@@ -69,6 +73,7 @@ class DocumentModel: ObservableObject {
         static func from(extension ext: String) -> FileType {
             switch ext.lowercased() {
             case "md", "markdown": return .markdown
+            case "html", "htm": return .html
             case "json", "jsonl": return .json
             case "yaml", "yml": return .yaml
             case "js", "jsx", "mjs", "cjs": return .javascript

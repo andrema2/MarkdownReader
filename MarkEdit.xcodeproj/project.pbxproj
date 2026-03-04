@@ -21,6 +21,7 @@
 		613BD41E93517579295AA8B3 /* MarkdownRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65259FEC7D4970C39D8022DC /* MarkdownRenderer.swift */; };
 		6292CBFBCE876FD33F050977 /* CSSLinterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00354402167320973DA8E4E3 /* CSSLinterTests.swift */; };
 		6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FA5647B08CDEB2636AF687 /* FileIO.swift */; };
+		7118CB80806EC96CD7B01017 /* HTMLPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3AC7103D1FF9C95B98F82D3 /* HTMLPreview.swift */; };
 		73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */; };
 		76CD46988AD02F8B144EC66A /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29BC36839415782416C4F52 /* StatusBarView.swift */; };
 		7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8FE7E6D7F55F49E36C2AF5 /* JSONLinter.swift */; };
@@ -79,6 +80,7 @@
 		DAB1F58C265ADACD87A9A44C /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
 		DC6230A769825B9AEB98FC26 /* LanguageMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMap.swift; sourceTree = "<group>"; };
 		DD39B990C189353E1832698C /* highlight */ = {isa = PBXFileReference; lastKnownFileType = folder; name = highlight; path = MarkdownReader/Resources/highlight; sourceTree = SOURCE_ROOT; };
+		E3AC7103D1FF9C95B98F82D3 /* HTMLPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLPreview.swift; sourceTree = "<group>"; };
 		E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F18899E99D0BCFE44A6AC84E /* MarkEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B64973AFFD2412DECE4F2B /* FormatControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatControls.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				7D92D8050670EB55F49A4BE3 /* HighlightEngine.swift */,
+				E3AC7103D1FF9C95B98F82D3 /* HTMLPreview.swift */,
 				DC6230A769825B9AEB98FC26 /* LanguageMap.swift */,
 				65259FEC7D4970C39D8022DC /* MarkdownRenderer.swift */,
 			);
@@ -337,6 +340,7 @@
 				6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */,
 				03C1E74DE091B3F9947401D5 /* FormatControls.swift in Sources */,
 				531DED1C6BDCDD35E5AB6E9E /* FormatConverter.swift in Sources */,
+				7118CB80806EC96CD7B01017 /* HTMLPreview.swift in Sources */,
 				EA7362E24ED586589DFC6612 /* HighlightEngine.swift in Sources */,
 				B6350D4313C4A7FCB6E30FC8 /* JSLinter.swift in Sources */,
 				7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */,

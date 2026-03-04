@@ -172,7 +172,7 @@ final class FileTypeTests: XCTestCase {
     // MARK: - CaseIterable & Identifiable
 
     func testAllCasesCount() {
-        XCTAssertEqual(FT.allCases.count, 7)
+        XCTAssertEqual(FT.allCases.count, 8)
     }
 
     func testIdentifiable() {

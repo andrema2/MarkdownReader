@@ -26,6 +26,9 @@ struct EditorView: View {
                         if document.fileType == .markdown {
                             MarkdownRenderer(markdown: document.content)
                                 .frame(minWidth: 300)
+                        } else if document.fileType == .html {
+                            HTMLPreview(html: document.content, baseURL: document.fileURL?.deletingLastPathComponent())
+                                .frame(minWidth: 300)
                         } else {
                             HighlightEngine(
                                 code: document.content,

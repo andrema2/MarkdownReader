@@ -108,6 +108,8 @@ struct ToolbarView: View {
         switch document.fileType {
         case .markdown:
             MarkdownControls(document: document)
+        case .html:
+            PlainTextControls(document: document)
         case .json:
             JSONControls(document: document)
         case .yaml:
