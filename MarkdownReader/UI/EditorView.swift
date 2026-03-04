@@ -23,11 +23,16 @@ struct EditorView: View {
                         .frame(minWidth: 300)
 
                     if showPreview {
-                        HighlightEngine(
-                            code: document.content,
-                            language: LanguageMap.language(for: document.fileExtension)
-                        )
-                        .frame(minWidth: 300)
+                        if document.fileType == .markdown {
+                            MarkdownRenderer(markdown: document.content)
+                                .frame(minWidth: 300)
+                        } else {
+                            HighlightEngine(
+                                code: document.content,
+                                language: LanguageMap.language(for: document.fileExtension)
+                            )
+                            .frame(minWidth: 300)
+                        }
                     }
                 }
 

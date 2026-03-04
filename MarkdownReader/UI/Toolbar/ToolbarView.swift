@@ -68,6 +68,22 @@ struct ToolbarView: View {
 
     private var globalActionsSection: some View {
         HStack(spacing: 2) {
+            toolbarButton("Open", icon: "folder", active: false) {
+                NotificationCenter.default.post(name: .openDocument, object: nil)
+            }
+
+            toolbarButton("Save", icon: "square.and.arrow.down", active: false) {
+                NotificationCenter.default.post(name: .saveDocument, object: nil)
+            }
+
+            toolbarButton("Save As", icon: "square.and.arrow.down.on.square", active: false) {
+                NotificationCenter.default.post(name: .saveDocumentAs, object: nil)
+            }
+
+            Divider()
+                .frame(height: 18)
+                .padding(.horizontal, 4)
+
             toolbarButton("Preview", icon: showPreview ? "eye.fill" : "eye.slash", active: showPreview) {
                 showPreview.toggle()
             }
