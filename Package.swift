@@ -2,12 +2,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "MarkdownReader",
+    name: "MarkEdit",
     platforms: [.macOS(.v13)],
     targets: [
         .executableTarget(
-            name: "MarkdownReader",
-            path: "MarkdownReader"
+            name: "MarkEdit",
+            path: "MarkdownReader",
+            exclude: [
+                "Info.plist",
+                "MarkdownReader.entitlements",
+                "Assets.xcassets",
+            ],
+            resources: [
+                .copy("Resources/highlight"),
+            ]
         ),
     ]
 )
