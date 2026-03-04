@@ -2,6 +2,7 @@ import SwiftUI
 import AppKit
 
 struct EditorView: View {
+    @EnvironmentObject var fileOpenRequest: FileOpenRequest
     @StateObject private var document = DocumentModel()
     @StateObject private var lintEngine = LintEngine()
     @State private var showLintPanel = true
@@ -39,7 +40,6 @@ struct EditorView: View {
             if showLintPanel {
                 LintPanel(lintEngine: lintEngine) { issue in
                     goToLine = nil
-                    // Small delay to ensure the state resets before setting new value
                     DispatchQueue.main.async {
                         goToLine = issue.line
                     }
@@ -56,6 +56,7 @@ struct EditorView: View {
         .onDrop(of: [.fileURL], isTargeted: $isDragTargeted) { providers in
             handleDrop(providers: providers)
         }
+        // Menu commands
         .onReceive(NotificationCenter.default.publisher(for: .newDocument)) { _ in
             newDocument()
         }
@@ -68,6 +69,19 @@ struct EditorView: View {
         .onReceive(NotificationCenter.default.publisher(for: .saveDocumentAs)) { _ in
             saveDocumentAs()
         }
+        .onReceive(NotificationCenter.default.publisher(for: .togglePreview)) { _ in
+            showPreview.toggle()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .toggleLintPanel)) { _ in
+            showLintPanel.toggle()
+        }
+        // File opened from Finder (double-click or drag to dock icon)
+        .onChange(of: fileOpenRequest.url) {
+            if let url = fileOpenRequest.url {
+                loadFile(url: url)
+                fileOpenRequest.url = nil
+            }
+        }
         .navigationTitle(document.fileName)
         .onChange(of: document.content) {
             runLint()
@@ -76,6 +90,8 @@ struct EditorView: View {
             if let url = document.fileURL {
                 NSApp.mainWindow?.representedURL = url
                 NSApp.mainWindow?.title = url.lastPathComponent
+                // Persist for restore on next launch
+                UserDefaults.standard.set(url.path, forKey: "lastOpenedFile")
             } else {
                 NSApp.mainWindow?.representedURL = nil
                 NSApp.mainWindow?.title = "Untitled"
@@ -142,6 +158,8 @@ struct EditorView: View {
             goToLine = nil
             updateWindowState()
             runLint()
+            // Save bookmark for restore on next launch
+            FileIO.saveBookmark(for: url)
         } catch {
             document.content = "Error loading file: \(error.localizedDescription)"
         }
@@ -171,4 +189,5 @@ struct EditorView: View {
 
 #Preview {
     EditorView()
+        .environmentObject(FileOpenRequest())
 }

@@ -22,54 +22,204 @@
 	<string>1</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
-	<key>NSMainStoryboardFile</key>
-	<string></string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+
+	<!-- Document Types: all extensions the app can open via double-click -->
 	<key>CFBundleDocumentTypes</key>
 	<array>
+		<!-- Markdown -->
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>md</string>
-				<string>markdown</string>
-				<string>json</string>
-				<string>yaml</string>
-				<string>yml</string>
-				<string>js</string>
-				<string>txt</string>
-			</array>
 			<key>CFBundleTypeName</key>
-			<string>Text Document</string>
+			<string>Markdown Document</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>net.daringfireball.markdown</string>
+			</array>
+		</dict>
+		<!-- JSON -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>JSON Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
 				<string>public.json</string>
+			</array>
+		</dict>
+		<!-- YAML -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>YAML Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
 				<string>public.yaml</string>
+			</array>
+		</dict>
+		<!-- JavaScript -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>JavaScript Source</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
 				<string>com.netscape.javascript-source</string>
+			</array>
+		</dict>
+		<!-- TypeScript -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>TypeScript Source</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.andrema2.markedit.typescript</string>
+			</array>
+		</dict>
+		<!-- CSS -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>CSS Stylesheet</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.css</string>
+			</array>
+		</dict>
+		<!-- Plain Text (catch-all) -->
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Plain Text</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Alternate</string>
+			<key>LSItemContentTypes</key>
+			<array>
 				<string>public.plain-text</string>
 			</array>
 		</dict>
 	</array>
+
+	<!-- Imported UTI declarations for types macOS doesn't know natively -->
 	<key>UTImportedTypeDeclarations</key>
 	<array>
+		<!-- Markdown -->
 		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>net.daringfireball.markdown</string>
+			<key>UTTypeDescription</key>
+			<string>Markdown Document</string>
 			<key>UTTypeConformsTo</key>
 			<array>
 				<string>public.text</string>
 			</array>
-			<key>UTTypeDescription</key>
-			<string>Markdown Document</string>
-			<key>UTTypeIdentifier</key>
-			<string>net.daringfireball.markdown</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
 				<array>
 					<string>md</string>
 					<string>markdown</string>
+					<string>mdown</string>
+					<string>mkd</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/markdown</string>
+				</array>
+			</dict>
+		</dict>
+		<!-- YAML -->
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>public.yaml</string>
+			<key>UTTypeDescription</key>
+			<string>YAML Document</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>yaml</string>
+					<string>yml</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/x-yaml</string>
+					<string>text/yaml</string>
+				</array>
+			</dict>
+		</dict>
+		<!-- TypeScript -->
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>com.andrema2.markedit.typescript</string>
+			<key>UTTypeDescription</key>
+			<string>TypeScript Source</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+				<string>com.netscape.javascript-source</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>ts</string>
+					<string>tsx</string>
+					<string>mts</string>
+					<string>cts</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>application/typescript</string>
+				</array>
+			</dict>
+		</dict>
+		<!-- CSS (not always declared on all systems) -->
+		<dict>
+			<key>UTTypeIdentifier</key>
+			<string>public.css</string>
+			<key>UTTypeDescription</key>
+			<string>CSS Stylesheet</string>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>css</string>
+					<string>scss</string>
+					<string>less</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>text/css</string>
 				</array>
 			</dict>
 		</dict>
