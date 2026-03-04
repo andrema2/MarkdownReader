@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03C1E74DE091B3F9947401D5 /* FormatControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B64973AFFD2412DECE4F2B /* FormatControls.swift */; };
+		12FF4AD448F68DAEED8F2932 /* LintPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C69899E780118AC468B10427 /* LintPanel.swift */; };
+		20ADD048EE0B9D4EFDE7713B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68DD447F2C6A17BB84B7860 /* AppDelegate.swift */; };
+		28A038B30EAAFE29C4E83041 /* LintEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B5376E9D312672CB1D9AF /* LintEngine.swift */; };
+		2AAC8359EC11D814F3B6277B /* YAMLLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA738D17F6E4DD53CF45FD58 /* YAMLLinter.swift */; };
+		6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FA5647B08CDEB2636AF687 /* FileIO.swift */; };
+		73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */; };
+		76CD46988AD02F8B144EC66A /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29BC36839415782416C4F52 /* StatusBarView.swift */; };
+		7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8FE7E6D7F55F49E36C2AF5 /* JSONLinter.swift */; };
+		B6350D4313C4A7FCB6E30FC8 /* JSLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8CFF3DA6BE737D6456C1C05 /* JSLinter.swift */; };
+		DBA64F65F680DED05011E596 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B031D2DC3103EF95EB92C209 /* ToolbarView.swift */; };
+		E61A3D5DB4C079E39067E3B3 /* DocumentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4622ABFC460ED188CBB5645 /* DocumentModel.swift */; };
+		EA7362E24ED586589DFC6612 /* HighlightEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D92D8050670EB55F49A4BE3 /* HighlightEngine.swift */; };
+		EC97554F485E6809AE632CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */; };
+		FFAE24B57892805F3ED1BC40 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041FA90049061E6E0EE051A3 /* EditorView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		041FA90049061E6E0EE051A3 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		1768ADCDA5264BB8F1A4CE79 /* MarkdownReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MarkdownReader.entitlements; sourceTree = "<group>"; };
+		4A8FE7E6D7F55F49E36C2AF5 /* JSONLinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLinter.swift; sourceTree = "<group>"; };
+		5F56EF692F0497D05158F548 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		72FA5647B08CDEB2636AF687 /* FileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileIO.swift; sourceTree = "<group>"; };
+		7D92D8050670EB55F49A4BE3 /* HighlightEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightEngine.swift; sourceTree = "<group>"; };
+		A29BC36839415782416C4F52 /* StatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarView.swift; sourceTree = "<group>"; };
+		A4622ABFC460ED188CBB5645 /* DocumentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentModel.swift; sourceTree = "<group>"; };
+		B031D2DC3103EF95EB92C209 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		B8CFF3DA6BE737D6456C1C05 /* JSLinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSLinter.swift; sourceTree = "<group>"; };
+		BA738D17F6E4DD53CF45FD58 /* YAMLLinter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YAMLLinter.swift; sourceTree = "<group>"; };
+		C69899E780118AC468B10427 /* LintPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LintPanel.swift; sourceTree = "<group>"; };
+		C93B5376E9D312672CB1D9AF /* LintEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LintEngine.swift; sourceTree = "<group>"; };
+		E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F18899E99D0BCFE44A6AC84E /* MarkEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4B64973AFFD2412DECE4F2B /* FormatControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatControls.swift; sourceTree = "<group>"; };
+		F68DD447F2C6A17BB84B7860 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkEditApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		07D7E5F46175307996F99D2C /* StatusBar */ = {
+			isa = PBXGroup;
+			children = (
+				A29BC36839415782416C4F52 /* StatusBarView.swift */,
+			);
+			path = StatusBar;
+			sourceTree = "<group>";
+		};
+		32646E94BA95948974E869C4 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F68DD447F2C6A17BB84B7860 /* AppDelegate.swift */,
+				FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		35E70C7D06E134473321FC8F = {
+			isa = PBXGroup;
+			children = (
+				368BC9570700EC17F4F41BAF /* MarkdownReader */,
+				D4B07DB86B387D6ECB268D1E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		368BC9570700EC17F4F41BAF /* MarkdownReader */ = {
+			isa = PBXGroup;
+			children = (
+				32646E94BA95948974E869C4 /* App */,
+				90DCF686D26E3232ABE29E70 /* Core */,
+				46996EBCD424662F157099EE /* Resources */,
+				464B65951843AB40D92524D1 /* UI */,
+				E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */,
+				5F56EF692F0497D05158F548 /* Info.plist */,
+				1768ADCDA5264BB8F1A4CE79 /* MarkdownReader.entitlements */,
+			);
+			path = MarkdownReader;
+			sourceTree = "<group>";
+		};
+		402CA019F994B52D61ED8319 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				C69899E780118AC468B10427 /* LintPanel.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		464B65951843AB40D92524D1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				402CA019F994B52D61ED8319 /* Sidebar */,
+				07D7E5F46175307996F99D2C /* StatusBar */,
+				5A24A9808654EF733FC81621 /* Toolbar */,
+				041FA90049061E6E0EE051A3 /* EditorView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		46996EBCD424662F157099EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		46B438D78FD81022E15B79E7 /* Lint */ = {
+			isa = PBXGroup;
+			children = (
+				B8CFF3DA6BE737D6456C1C05 /* JSLinter.swift */,
+				4A8FE7E6D7F55F49E36C2AF5 /* JSONLinter.swift */,
+				C93B5376E9D312672CB1D9AF /* LintEngine.swift */,
+				BA738D17F6E4DD53CF45FD58 /* YAMLLinter.swift */,
+			);
+			path = Lint;
+			sourceTree = "<group>";
+		};
+		5A24A9808654EF733FC81621 /* Toolbar */ = {
+			isa = PBXGroup;
+			children = (
+				F4B64973AFFD2412DECE4F2B /* FormatControls.swift */,
+				B031D2DC3103EF95EB92C209 /* ToolbarView.swift */,
+			);
+			path = Toolbar;
+			sourceTree = "<group>";
+		};
+		90DCF686D26E3232ABE29E70 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				BCCD9E88A2B7682ED2F00853 /* FileManager */,
+				46B438D78FD81022E15B79E7 /* Lint */,
+				AD7C5EB50EE0B1768DA70447 /* SyntaxHighlight */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		AD7C5EB50EE0B1768DA70447 /* SyntaxHighlight */ = {
+			isa = PBXGroup;
+			children = (
+				7D92D8050670EB55F49A4BE3 /* HighlightEngine.swift */,
+			);
+			path = SyntaxHighlight;
+			sourceTree = "<group>";
+		};
+		BCCD9E88A2B7682ED2F00853 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				A4622ABFC460ED188CBB5645 /* DocumentModel.swift */,
+				72FA5647B08CDEB2636AF687 /* FileIO.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		D4B07DB86B387D6ECB268D1E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F18899E99D0BCFE44A6AC84E /* MarkEdit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9ED964A7F37E6FB684C0FD74 /* MarkEdit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ACBF2DBDE44D750BD56B79DD /* Build configuration list for PBXNativeTarget "MarkEdit" */;
+			buildPhases = (
+				74D39941C34A5701821C60B8 /* Sources */,
+				C8C8946AC88062E18AF1EBF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MarkEdit;
+			packageProductDependencies = (
+			);
+			productName = MarkEdit;
+			productReference = F18899E99D0BCFE44A6AC84E /* MarkEdit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8B9C369E6B48DAF9BCF8EB46 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					9ED964A7F37E6FB684C0FD74 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 5EC9354FB36126E304D85EF1 /* Build configuration list for PBXProject "MarkEdit" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 35E70C7D06E134473321FC8F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9ED964A7F37E6FB684C0FD74 /* MarkEdit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C8C8946AC88062E18AF1EBF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC97554F485E6809AE632CDE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		74D39941C34A5701821C60B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20ADD048EE0B9D4EFDE7713B /* AppDelegate.swift in Sources */,
+				E61A3D5DB4C079E39067E3B3 /* DocumentModel.swift in Sources */,
+				FFAE24B57892805F3ED1BC40 /* EditorView.swift in Sources */,
+				6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */,
+				03C1E74DE091B3F9947401D5 /* FormatControls.swift in Sources */,
+				EA7362E24ED586589DFC6612 /* HighlightEngine.swift in Sources */,
+				B6350D4313C4A7FCB6E30FC8 /* JSLinter.swift in Sources */,
+				7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */,
+				28A038B30EAAFE29C4E83041 /* LintEngine.swift in Sources */,
+				12FF4AD448F68DAEED8F2932 /* LintPanel.swift in Sources */,
+				73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */,
+				76CD46988AD02F8B144EC66A /* StatusBarView.swift in Sources */,
+				DBA64F65F680DED05011E596 /* ToolbarView.swift in Sources */,
+				2AAC8359EC11D814F3B6277B /* YAMLLinter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		6C3D7B1C96E2EA345FB154CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		8812D2F0C3B2D14CCF44F72F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MarkdownReader/MarkdownReader.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrema2.MarkEdit;
+				PRODUCT_NAME = MarkEdit;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		ADDC49C9B75C749EC0599010 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MarkdownReader/MarkdownReader.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = MarkdownReader/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrema2.MarkEdit;
+				PRODUCT_NAME = MarkEdit;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		F4729EFF0F8B3338CA3106F1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5EC9354FB36126E304D85EF1 /* Build configuration list for PBXProject "MarkEdit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4729EFF0F8B3338CA3106F1 /* Debug */,
+				6C3D7B1C96E2EA345FB154CC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		ACBF2DBDE44D750BD56B79DD /* Build configuration list for PBXNativeTarget "MarkEdit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8812D2F0C3B2D14CCF44F72F /* Debug */,
+				ADDC49C9B75C749EC0599010 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8B9C369E6B48DAF9BCF8EB46 /* Project object */;
+}
