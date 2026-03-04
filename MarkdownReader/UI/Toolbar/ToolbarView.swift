@@ -4,6 +4,7 @@ struct ToolbarView: View {
     @ObservedObject var document: DocumentModel
     @ObservedObject var lintEngine: LintEngine
     @Binding var showLintPanel: Bool
+    @Binding var showPreview: Bool
 
     var body: some View {
         HStack(spacing: 12) {
@@ -30,6 +31,13 @@ struct ToolbarView: View {
             }
 
             Spacer()
+
+            // Preview toggle
+            Button(action: { showPreview.toggle() }) {
+                Image(systemName: showPreview ? "eye.fill" : "eye.slash")
+            }
+            .buttonStyle(.borderless)
+            .help("Toggle syntax highlight preview")
 
             // Lint toggle
             Button(action: { showLintPanel.toggle() }) {

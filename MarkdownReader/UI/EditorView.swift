@@ -5,17 +5,29 @@ struct EditorView: View {
     @StateObject private var document = DocumentModel()
     @StateObject private var lintEngine = LintEngine()
     @State private var showLintPanel = true
+    @State private var showPreview = true
     @State private var isDragTargeted = false
 
     var body: some View {
         HSplitView {
             // Main editor area
             VStack(spacing: 0) {
-                ToolbarView(document: document, lintEngine: lintEngine, showLintPanel: $showLintPanel)
+                ToolbarView(document: document, lintEngine: lintEngine, showLintPanel: $showLintPanel, showPreview: $showPreview)
 
                 Divider()
 
-                CodeTextView(document: document)
+                HSplitView {
+                    CodeTextView(document: document)
+                        .frame(minWidth: 300)
+
+                    if showPreview {
+                        HighlightEngine(
+                            code: document.content,
+                            language: LanguageMap.language(for: document.fileExtension)
+                        )
+                        .frame(minWidth: 300)
+                    }
+                }
 
                 Divider()
 

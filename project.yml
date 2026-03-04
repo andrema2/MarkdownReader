@@ -19,10 +19,12 @@ targets:
     sources:
       - path: MarkdownReader
         excludes:
-          - Resources/highlight/.gitkeep
-    resources:
-      - path: MarkdownReader/Assets.xcassets
+          - Resources
       - path: MarkdownReader/Resources/highlight
+        buildPhase: resources
+        type: folder
+      - path: MarkdownReader/Assets.xcassets
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andrema2.MarkEdit

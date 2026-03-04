@@ -12,6 +12,8 @@
 		20ADD048EE0B9D4EFDE7713B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68DD447F2C6A17BB84B7860 /* AppDelegate.swift */; };
 		28A038B30EAAFE29C4E83041 /* LintEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93B5376E9D312672CB1D9AF /* LintEngine.swift */; };
 		2AAC8359EC11D814F3B6277B /* YAMLLinter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA738D17F6E4DD53CF45FD58 /* YAMLLinter.swift */; };
+		3F597A7BF0C4B7C25BA2FDA8 /* highlight in Resources */ = {isa = PBXBuildFile; fileRef = DD39B990C189353E1832698C /* highlight */; };
+		54DDF274D31B868655ABDF3B /* LanguageMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6230A769825B9AEB98FC26 /* LanguageMap.swift */; };
 		6C55BD0A8DED4BD5C5722F3B /* FileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72FA5647B08CDEB2636AF687 /* FileIO.swift */; };
 		73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA84FFF4FAE9B0FF161BBD4F /* MarkEditApp.swift */; };
 		76CD46988AD02F8B144EC66A /* StatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A29BC36839415782416C4F52 /* StatusBarView.swift */; };
@@ -40,6 +42,8 @@
 		C69899E780118AC468B10427 /* LintPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LintPanel.swift; sourceTree = "<group>"; };
 		C93B5376E9D312672CB1D9AF /* LintEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LintEngine.swift; sourceTree = "<group>"; };
 		DAB1F58C265ADACD87A9A44C /* CodeTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeTextView.swift; sourceTree = "<group>"; };
+		DC6230A769825B9AEB98FC26 /* LanguageMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMap.swift; sourceTree = "<group>"; };
+		DD39B990C189353E1832698C /* highlight */ = {isa = PBXFileReference; lastKnownFileType = folder; name = highlight; path = MarkdownReader/Resources/highlight; sourceTree = SOURCE_ROOT; };
 		E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F18899E99D0BCFE44A6AC84E /* MarkEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarkEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4B64973AFFD2412DECE4F2B /* FormatControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatControls.swift; sourceTree = "<group>"; };
@@ -69,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				368BC9570700EC17F4F41BAF /* MarkdownReader */,
+				DD39B990C189353E1832698C /* highlight */,
 				D4B07DB86B387D6ECB268D1E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -78,7 +83,6 @@
 			children = (
 				32646E94BA95948974E869C4 /* App */,
 				90DCF686D26E3232ABE29E70 /* Core */,
-				46996EBCD424662F157099EE /* Resources */,
 				464B65951843AB40D92524D1 /* UI */,
 				E551BB7E9F6AEAB1CD7EF661 /* Assets.xcassets */,
 				5F56EF692F0497D05158F548 /* Info.plist */,
@@ -105,13 +109,6 @@
 				041FA90049061E6E0EE051A3 /* EditorView.swift */,
 			);
 			path = UI;
-			sourceTree = "<group>";
-		};
-		46996EBCD424662F157099EE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		46B438D78FD81022E15B79E7 /* Lint */ = {
@@ -148,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				7D92D8050670EB55F49A4BE3 /* HighlightEngine.swift */,
+				DC6230A769825B9AEB98FC26 /* LanguageMap.swift */,
 			);
 			path = SyntaxHighlight;
 			sourceTree = "<group>";
@@ -229,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC97554F485E6809AE632CDE /* Assets.xcassets in Resources */,
+				3F597A7BF0C4B7C25BA2FDA8 /* highlight in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +247,7 @@
 				EA7362E24ED586589DFC6612 /* HighlightEngine.swift in Sources */,
 				B6350D4313C4A7FCB6E30FC8 /* JSLinter.swift in Sources */,
 				7E3C6C74A9B3D20A7ACF4A32 /* JSONLinter.swift in Sources */,
+				54DDF274D31B868655ABDF3B /* LanguageMap.swift in Sources */,
 				28A038B30EAAFE29C4E83041 /* LintEngine.swift in Sources */,
 				12FF4AD448F68DAEED8F2932 /* LintPanel.swift in Sources */,
 				73A073B0B502AC257B5EBA91 /* MarkEditApp.swift in Sources */,
