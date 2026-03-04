@@ -84,6 +84,67 @@ class DocumentModel: ObservableObject {
         }
     }
 
+    // MARK: - YAML Subtype Detection
+
+    enum YAMLSubtype: Equatable {
+        case dockerCompose
+        case kubernetes
+        case githubActions
+        case gitlabCI
+        case generic
+    }
+
+    var yamlSubtype: YAMLSubtype {
+        guard fileType == .yaml else { return .generic }
+        let name = fileURL?.lastPathComponent.lowercased() ?? ""
+        let pathComponents = fileURL?.pathComponents.map { $0.lowercased() } ?? []
+
+        // Filename-based (fast, unambiguous)
+        if name.hasPrefix("docker-compose") || name.hasPrefix("compose") { return .dockerCompose }
+        if name == ".gitlab-ci.yml" || name == ".gitlab-ci.yaml" { return .gitlabCI }
+        if pathComponents.contains(".github") && pathComponents.contains("workflows") { return .githubActions }
+
+        // Content-based (first 4KB)
+        let preview = String(content.prefix(4096))
+        let lines = preview.components(separatedBy: .newlines)
+
+        let hasApiVersion = lines.contains { $0.hasPrefix("apiVersion:") }
+        let hasKind = lines.contains { $0.hasPrefix("kind:") }
+        if hasApiVersion && hasKind { return .kubernetes }
+
+        let hasOn = lines.contains { $0 == "on:" || $0.hasPrefix("on:") }
+        let hasJobs = lines.contains { $0.hasPrefix("jobs:") }
+        if hasOn && hasJobs { return .githubActions }
+
+        let hasServices = lines.contains { $0.hasPrefix("services:") }
+        if hasServices { return .dockerCompose }
+
+        let hasStages = lines.contains { $0.hasPrefix("stages:") }
+        if hasStages && !hasApiVersion { return .gitlabCI }
+
+        return .generic
+    }
+
+    // MARK: - JSON Subtype Detection
+
+    enum JSONSubtype: Equatable {
+        case packageJSON
+        case tsconfig
+        case eslint
+        case generic
+    }
+
+    var jsonSubtype: JSONSubtype {
+        guard fileType == .json else { return .generic }
+        let name = fileURL?.lastPathComponent.lowercased() ?? ""
+        if name == "package.json" { return .packageJSON }
+        if name.contains("tsconfig") { return .tsconfig }
+        if name.contains("eslint") { return .eslint }
+        return .generic
+    }
+
+    // MARK: - Content
+
     func updateContent(_ newContent: String) {
         content = newContent
         isDirty = true

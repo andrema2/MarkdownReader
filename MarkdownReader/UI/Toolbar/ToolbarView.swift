@@ -109,7 +109,7 @@ struct ToolbarView: View {
         case .markdown:
             MarkdownControls(document: document)
         case .html:
-            PlainTextControls(document: document)
+            HTMLControls(document: document)
         case .json:
             JSONControls(document: document)
         case .yaml:
