@@ -9,13 +9,21 @@ class DocumentModel: ObservableObject {
     @Published var cursorLine: Int = 1
     @Published var cursorColumn: Int = 1
     @Published var currentLineIssue: LintIssue?
+    @Published var columnSelectionInfo: ColumnSelectionInfo?
+    @Published var wordWrapEnabled: Bool = true
+    @Published var matchingBracketRange: NSRange?
+    @Published var remoteFileRef: RemoteFileReference?
+
+    var isRemote: Bool { remoteFileRef != nil }
 
     var fileName: String {
-        fileURL?.lastPathComponent ?? "Untitled"
+        if let ref = remoteFileRef { return ref.fileName }
+        return fileURL?.lastPathComponent ?? "Untitled"
     }
 
     var fileExtension: String {
-        fileURL?.pathExtension.lowercased() ?? "md"
+        if let ref = remoteFileRef { return ref.fileExtension }
+        return fileURL?.pathExtension.lowercased() ?? "md"
     }
 
     enum FileType: String, CaseIterable, Identifiable {

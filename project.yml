@@ -7,6 +7,11 @@ options:
   generateEmptyDirectories: true
   groupSortPosition: top
 
+packages:
+  Citadel:
+    url: https://github.com/orlandos-nl/Citadel.git
+    from: 0.7.0
+
 settings:
   base:
     SWIFT_VERSION: "5.9"
@@ -25,6 +30,8 @@ targets:
         type: folder
       - path: MarkdownReader/Assets.xcassets
         buildPhase: resources
+    dependencies:
+      - package: Citadel
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.andrema2.MarkEdit

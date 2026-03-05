@@ -2,27 +2,34 @@ import SwiftUI
 import AppKit
 
 struct EditorView: View {
-    @EnvironmentObject var fileOpenRequest: FileOpenRequest
-    @StateObject private var document = DocumentModel()
-    @StateObject private var lintEngine = LintEngine()
-    @State private var showLintPanel = true
-    @State private var showPreview = true
+    @ObservedObject var tab: TabItem
     @State private var isDragTargeted = false
-    @State private var goToLine: Int?
+
+    private var document: DocumentModel { tab.document }
+    private var lintEngine: LintEngine { tab.lintEngine }
 
     var body: some View {
         HSplitView {
             // Main editor area
             VStack(spacing: 0) {
-                ToolbarView(document: document, lintEngine: lintEngine, showLintPanel: $showLintPanel, showPreview: $showPreview)
+                ToolbarView(document: document, lintEngine: lintEngine, showLintPanel: $tab.showLintPanel, showPreview: $tab.showPreview)
 
                 Divider()
 
+                if tab.showFindPanel {
+                    FindReplacePanel(engine: tab.findEngine, showReplace: tab.findReplaceMode) {
+                        tab.showFindPanel = false
+                        tab.findEngine.matches = []
+                        tab.findEngine.currentMatchIndex = -1
+                    }
+                    Divider()
+                }
+
                 HSplitView {
-                    CodeTextView(document: document, lintEngine: lintEngine, goToLine: goToLine)
+                    CodeTextView(document: document, lintEngine: lintEngine, goToLine: tab.goToLine, findEngine: tab.findEngine, foldingEngine: tab.foldingEngine, diffEngine: tab.diffEngine, bookmarkEngine: tab.bookmarkEngine)
                         .frame(minWidth: 300)
 
-                    if showPreview {
+                    if tab.showPreview {
                         if document.fileType == .markdown {
                             MarkdownRenderer(markdown: document.content)
                                 .frame(minWidth: 300)
@@ -45,17 +52,16 @@ struct EditorView: View {
             }
 
             // Lint sidebar
-            if showLintPanel {
+            if tab.showLintPanel {
                 LintPanel(lintEngine: lintEngine) { issue in
-                    goToLine = nil
+                    tab.goToLine = nil
                     DispatchQueue.main.async {
-                        goToLine = issue.line
+                        tab.goToLine = issue.line
                     }
                 }
                 .frame(minWidth: 240, maxWidth: 350)
             }
         }
-        .frame(minWidth: 700, minHeight: 500)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
                 .stroke(isDragTargeted ? Color.accentColor : Color.clear, lineWidth: 3)
@@ -64,122 +70,30 @@ struct EditorView: View {
         .onDrop(of: [.fileURL], isTargeted: $isDragTargeted) { providers in
             handleDrop(providers: providers)
         }
-        // Menu commands
-        .onReceive(NotificationCenter.default.publisher(for: .newDocument)) { _ in
-            newDocument()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .openDocument)) { _ in
-            openDocument()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .saveDocument)) { _ in
-            saveDocument()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .saveDocumentAs)) { _ in
-            saveDocumentAs()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .togglePreview)) { _ in
-            showPreview.toggle()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: .toggleLintPanel)) { _ in
-            showLintPanel.toggle()
-        }
-        // File opened from Finder (double-click or drag to dock icon)
-        .onChange(of: fileOpenRequest.url) {
-            if let url = fileOpenRequest.url {
-                loadFile(url: url)
-                fileOpenRequest.url = nil
-            }
-        }
-        .navigationTitle(document.fileName)
         .onChange(of: document.content) {
-            runLint()
+            lintEngine.run(content: document.content, fileExtension: document.fileExtension)
         }
-        .onChange(of: document.fileURL) {
-            if let url = document.fileURL {
-                NSApp.mainWindow?.representedURL = url
-                NSApp.mainWindow?.title = url.lastPathComponent
-                // Persist for restore on next launch
-                UserDefaults.standard.set(url.path, forKey: "lastOpenedFile")
-            } else {
-                NSApp.mainWindow?.representedURL = nil
-                NSApp.mainWindow?.title = "Untitled"
+        .onReceive(NotificationCenter.default.publisher(for: .toggleBookmark)) { _ in
+            tab.bookmarkEngine.toggleBookmark(at: document.cursorLine)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .nextBookmark)) { _ in
+            if let line = tab.bookmarkEngine.nextBookmark(after: document.cursorLine) {
+                tab.goToLine = nil
+                DispatchQueue.main.async { tab.goToLine = line }
             }
         }
-    }
-
-    // MARK: - File Operations
-
-    private func newDocument() {
-        document.content = ""
-        document.fileURL = nil
-        document.isDirty = false
-        document.fileType = .markdown
-        lintEngine.clear()
-        goToLine = nil
-        updateWindowState()
-    }
-
-    private func openDocument() {
-        FileIO.open { url in
-            guard let url else { return }
-            loadFile(url: url)
-        }
-    }
-
-    private func saveDocument() {
-        if let url = document.fileURL {
-            do {
-                try FileIO.write(document.content, to: url, encoding: document.encoding)
-                document.markClean()
-                updateWindowState()
-            } catch {
-                // TODO: show alert
-            }
-        } else {
-            saveDocumentAs()
-        }
-    }
-
-    private func saveDocumentAs() {
-        FileIO.save(suggestedName: document.fileName) { url in
-            guard let url else { return }
-            do {
-                try FileIO.write(document.content, to: url, encoding: document.encoding)
-                document.fileURL = url
-                document.fileType = .from(extension: url.pathExtension)
-                document.markClean()
-                updateWindowState()
-            } catch {
-                // TODO: show alert
+        .onReceive(NotificationCenter.default.publisher(for: .previousBookmark)) { _ in
+            if let line = tab.bookmarkEngine.previousBookmark(before: document.cursorLine) {
+                tab.goToLine = nil
+                DispatchQueue.main.async { tab.goToLine = line }
             }
         }
-    }
-
-    private func loadFile(url: URL) {
-        do {
-            let (content, encoding) = try FileIO.read(from: url)
-            document.content = content
-            document.fileURL = url
-            document.encoding = encoding
-            document.fileType = .from(extension: url.pathExtension)
-            document.isDirty = false
-            goToLine = nil
-            updateWindowState()
-            runLint()
-            // Save bookmark for restore on next launch
-            FileIO.saveBookmark(for: url)
-        } catch {
-            document.content = "Error loading file: \(error.localizedDescription)"
+        .onReceive(NotificationCenter.default.publisher(for: .showDiff)) { _ in
+            tab.diffEngine.computeDiff(currentContent: document.content, fileURL: document.fileURL)
         }
     }
 
-    private func runLint() {
-        lintEngine.run(content: document.content, fileExtension: document.fileExtension)
-    }
-
-    private func updateWindowState() {
-        NSApp.mainWindow?.isDocumentEdited = document.isDirty
-    }
+    // MARK: - Drag & Drop
 
     private func handleDrop(providers: [NSItemProvider]) -> Bool {
         guard let provider = providers.first else { return false }
@@ -187,15 +101,11 @@ struct EditorView: View {
             if let data = item as? Data,
                let url = URL(dataRepresentation: data, relativeTo: nil) {
                 DispatchQueue.main.async {
-                    loadFile(url: url)
+                    // Post notification so TabContainerView handles it as a new tab
+                    NotificationCenter.default.post(name: .openFileFromFinder, object: url)
                 }
             }
         }
         return true
     }
-}
-
-#Preview {
-    EditorView()
-        .environmentObject(FileOpenRequest())
 }
